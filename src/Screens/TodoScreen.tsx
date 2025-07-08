@@ -12,30 +12,30 @@ import {
 } from "react-native";
 
 import styles from "./TodoScreen.style";
-import TodoComponent from '../components/TodoComponent';
+import TodoComponent from "../components/TodoComponent";
 import { useState } from "react";
 import TodoViewModel from "../viewModels/TodoViewModel";
-import Todo from '../models/Todo'
+import Todo from "../models/Todo";
 export default function TodoScreen() {
-  const {todoList, addTodo, deleteTodo}  = TodoViewModel(); 
-  const [todo, onChangeTodo] = useState("");
-  const dummyTodoList: Todo[]= [
+  const { todoList, addTodo, deleteTodo, changeStatusTodo } = TodoViewModel();
+  const [inpTodo, onChangeInputTodo] = useState("");
+  const dummyTodoList: Todo[] = [
     {
-      id:0,
-      todoName:'apple',
-      todoStatus:true
+      id: "0",
+      todoName: "apple",
+      todoStatus: true,
     },
     {
-      id:1,
-      todoName:'bannana',
-      todoStatus:true
+      id: "1",
+      todoName: "bannana",
+      todoStatus: true,
     },
     {
-      id:2,
-      todoName:'orange',
-      todoStatus:true
-    }
-  ]
+      id: "2",
+      todoName: "orange",
+      todoStatus: true,
+    },
+  ];
 
   return (
     <View style={styles.containerUi}>
@@ -49,17 +49,41 @@ export default function TodoScreen() {
         />
       </View>
       <View>
-        <TextInput style={styles.inputUi} placeholder="Add your task" value={todo} onChangeText={onChangeTodo}></TextInput>
-        <TouchableOpacity style={styles.addButtonUi} onPress={()=>addTodo(todo)}>
+        <TextInput
+          style={styles.inputUi}
+          onSubmitEditing={() => {
+            onChangeInputTodo((inpTodo) => (inpTodo = ""));
+            addTodo(inpTodo);
+          }}
+          placeholder="Add your task"
+          value={inpTodo}
+          onChangeText={onChangeInputTodo}
+        ></TextInput>
+        <TouchableOpacity
+          style={styles.addButtonUi}
+          onPress={() => {
+            onChangeInputTodo((inpTodo) => (inpTodo = ""));
+            addTodo(inpTodo);
+          }}
+        >
           <Text style={styles.addButtonTextUi}>Add</Text>
         </TouchableOpacity>
       </View>
-      <FlatList style={styles.scrollUi}
-      data = {todoList}
-      renderItem={({item}) => <TodoComponent id={item.id} todoName={item.todoName} onDelete={deleteTodo}/>}
-      keyExtractor={todo => todo.id.toString()}
+      <FlatList
+        style={styles.scrollUi}
+        keyboardShouldPersistTaps="handled"
+        data={todoList}
+        renderItem={({ item }) => (
+          <TodoComponent
+            id={item.id}
+            todoName={item.todoName}
+            todoStatus={item.todoStatus}
+            onDelete={deleteTodo}
+            onChangeStatus={changeStatusTodo}
+          />
+        )}
+        keyExtractor={(todo) => todo.id}
       />
     </View>
   );
 }
-
