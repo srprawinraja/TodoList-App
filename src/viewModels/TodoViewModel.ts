@@ -1,43 +1,49 @@
+import { useEffect, useRef, useState } from "react";
+import uuid from "react-native-uuid";
+import Todo from "../models/Todo";
+import { _store_data, _retrieveData } from "../models/TodoStorage";
+export default function TodoViewModel() {
+  const [todoList, setTodoList] = useState<Todo[]>([]);
 
-import {useRef, useState} from 'react';
-import Todo from '../models/Todo';
+  useEffect(() => {
+    const fetchTodoList = async () => {
+      const loaded = await _retrieveData();
+      setTodoList(loaded);
+    };
+    fetchTodoList();
+  }, []);
 
-export default function TodoViewModel(){
-    const [todoList, setTodoList] = useState<Todo[]>([]);
-    const currentId = useRef(0);
-
-    const addTodo=(name:string)=>{
-        currentId.current+=1;
-        const newTodo:Todo = {
-            id: currentId.current,
-            todoName: name,
-            todoStatus : false 
-        };
-        setTodoList((todoList)=>[...todoList, newTodo])
+  const addTodo = (name: string) => {
+    if (name.length >= 1) {
+      const newTodo: Todo = {
+        id: uuid.v4(),
+        todoName: name,
+        todoStatus: false,
+      };
+      const newTodoList = [...todoList, newTodo];
+      setTodoList(newTodoList);
+      _store_data(newTodoList);
     }
+  };
 
-    const changeStatusTodo = (id:number) => 
-        setTodoList(todoList=>
-            todoList.map(todo=>
-                todo.id === id ? {...todo, todoStatus:!todo.todoStatus} : todo
-            )
-        )
-    
+  const changeStatusTodo = (id: string) => {
+    const newTodoList: Todo[] = todoList.map((todo) =>
+      todo.id === id ? { ...todo, todoStatus: !todo.todoStatus } : todo
+    );
+    setTodoList(newTodoList);
+    _store_data(newTodoList);
+  };
 
-    const deleteTodo = (id:number) => {
+  const deleteTodo = (id: string) => {
+    const newTodoList = todoList.filter((todo) => todo.id !== id);
+    setTodoList(newTodoList);
+    _store_data(newTodoList);
+  };
 
-
-        setTodoList(todoList=>todoList.filter(todo=>
-            todo.id !== id
-        ))
-        
-
-    }
-
-    return {
-        todoList,
-        addTodo,
-        changeStatusTodo,
-        deleteTodo,
-    }
+  return {
+    todoList,
+    addTodo,
+    changeStatusTodo,
+    deleteTodo,
+  };
 }

@@ -1,6 +1,6 @@
-type Todo={
-    id:number,
-    todoName:string,
-    todoStatus:boolean
-}
+type Todo = {
+  id: string;
+  todoName: string;
+  todoStatus: boolean;
+};
 export default Todo;
