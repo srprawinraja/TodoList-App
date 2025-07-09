@@ -16,6 +16,7 @@ import TodoComponent from "../components/TodoComponent";
 import { useState } from "react";
 import TodoViewModel from "../viewModels/TodoViewModel";
 import Todo from "../models/Todo";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 export default function TodoScreen() {
   const { todoList, addTodo, deleteTodo, changeStatusTodo } = TodoViewModel();
   const [inpTodo, onChangeInputTodo] = useState("");
@@ -38,8 +39,8 @@ export default function TodoScreen() {
   ];
 
   return (
-    <View style={styles.containerUi}>
-      <View style={styles.topBarUi}>
+    <SafeAreaProvider style={styles.containerUi}>
+      <SafeAreaView style={styles.topBarUi}>
         <Text style={styles.titleUi}>To-Do List</Text>
         <Image
           style={styles.tinyLogoUi}
@@ -47,8 +48,8 @@ export default function TodoScreen() {
             uri: "https://img.icons8.com/?size=100&id=114426&format=png&color=000000",
           }}
         />
-      </View>
-      <View>
+      </SafeAreaView>
+      <SafeAreaView>
         <TextInput
           style={styles.inputUi}
           onSubmitEditing={() => {
@@ -68,7 +69,7 @@ export default function TodoScreen() {
         >
           <Text style={styles.addButtonTextUi}>Add</Text>
         </TouchableOpacity>
-      </View>
+      </SafeAreaView>
       <FlatList
         style={styles.scrollUi}
         keyboardShouldPersistTaps="handled"
@@ -84,6 +85,6 @@ export default function TodoScreen() {
         )}
         keyExtractor={(todo) => todo.id}
       />
-    </View>
+    </SafeAreaProvider>
   );
 }
