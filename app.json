@@ -1,35 +1,21 @@
 {
   "expo": {
     "name": "Todo",
-    "slug": "todoList",
+    "slug": "Todo",
     "version": "1.0.0",
+    "sdkVersion": "53.0.0",
+    "platforms": [
+      "android"
+    ],
     "orientation": "portrait",
     "icon": "./assets/app-logo.png",
-    "userInterfaceStyle": "light",
-    "newArchEnabled": true,
-    "splash": {
-      "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "edgeToEdgeEnabled": true,
-      "package": "com.srprawinraja.todoList"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
     "extra": {
       "eas": {
-        "projectId": "aec004dc-eb39-4531-9bb8-c5446491dfdc"
+        "projectId": "b67ef35d-9a95-4484-a75a-c5ef970d2047"
       }
+    },
+    "android": {
+      "package": "com.srprawinraja.Todo"
     }
   }
 }
