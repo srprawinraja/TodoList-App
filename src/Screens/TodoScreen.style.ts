@@ -4,7 +4,7 @@ export default StyleSheet.create({
   containerUi: {
     backgroundColor: "#FFFFFF",
     padding: 20,
-    marginTop: 20,
+    marginTop: 30,
     flex: 1,
   },
   scrollUi: {
