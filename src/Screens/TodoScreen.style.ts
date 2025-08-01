@@ -3,9 +3,8 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   containerUi: {
     backgroundColor: "#FFFFFF",
-    padding: 20,
-    marginTop: 30,
     flex: 1,
+    padding:20
   },
   scrollUi: {
     marginTop: 35,

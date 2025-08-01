@@ -5,7 +5,8 @@
     "version": "1.0.0",
     "sdkVersion": "53.0.0",
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ],
     "orientation": "portrait",
     "icon": "./assets/app-logo.png",
@@ -16,6 +17,9 @@
     },
     "android": {
       "package": "com.srprawinraja.Todo"
+    },
+    "ios": {
+      "bundleIdentifier": "com.srprawinraja.Todo"
     }
   }
 }
