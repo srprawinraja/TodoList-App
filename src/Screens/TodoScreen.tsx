@@ -15,6 +15,7 @@ import TodoComponent from "../components/TodoComponent";
 import { useState } from "react";
 import TodoViewModel from "../viewModels/TodoViewModel";
 import Todo from "../models/Todo";
+
 export default function TodoScreen() {
   const { todoList, addTodo, deleteTodo, changeStatusTodo } = TodoViewModel();
   const [inpTodo, onChangeInputTodo] = useState("");

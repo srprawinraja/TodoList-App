@@ -1,0 +1,2 @@
+start command: npm start
+create: npx create-expo-app@latest
